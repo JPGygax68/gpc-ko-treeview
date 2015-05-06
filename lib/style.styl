@@ -1,0 +1,120 @@
+// TODO: move this into separate stylesheet
+
+.GPC {
+  font-family: Arial, Sans-Serif;
+  display: inline-block;
+  padding: 0.5em;
+}
+
+.GPC.TreeView {
+
+  // The tree view is based on an unnumbered list, but we remove the decorations and spacing
+  
+  ul.children {
+    margin: 0;
+    padding: 0;
+    > li {
+      list-style-type: none;
+      margin-left: 0; // only for the root node, and only if it is not shown
+    }
+  }
+  
+  .node {
+  
+    // The "header" of a node is its first row, where its "handle", label and possibly 
+    // additional columns are displayed
+    
+    > .header {
+
+      display: table;
+      
+      border: 0;
+      margin: 0;
+      border-spacing: 0;
+      
+      // The "main" part of the header row is what contains the "handle" (to show/hide 
+      // child nodes) and the "label". The "main" pseudo-"column" is separate from any 
+      // additional ones because this is where indentation occurs, whereas subsequent 
+      // columns are aligned.
+      
+      > tbody > .main {
+      
+        overflow: hidden;
+        
+        white-space: nowrap;
+        
+        > * {
+          display: inline-block;
+          box-sizing: border-box;
+          padding: 0;
+        }
+        
+        > .handle {
+          position: relative;
+          top: 0px;
+          width: 11+4px;
+          height: 11px;
+          background-repeat: no-repeat;
+          user-select: none;
+        }
+
+        > .label {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          &:first-child: { padding-left: 0; }
+        }
+        
+      } // > .main
+      
+      > .value {
+        //padding: 1px 2px;
+      }
+      
+    } // > .header
+
+  } // .node
+  
+  // A node not explicitly marked as a "leaf" will have a "handle"
+  
+  .node.open {
+    > .header .main .handle {
+      background-image: url('minus.png');
+    }
+    > .children {
+      display: block;
+    }
+  }
+  .node.closed {
+    > .header .main .handle {
+      background-image: url('plus.png');
+    }
+    > .children {
+      display: none;
+    }
+  }
+  
+  // We want to remove unnecessary padding from input fields in a treeview
+  
+  input { padding: 0; }
+}
+ 
+// DEBUGGING -------------------
+  
+if (false)
+
+  .GPC.TreeView {
+
+    background-color: orange;
+    
+    .node {
+      background-color: rgba(0, 100, 255, 0.5);
+    }
+  }
+
+.GPC.TreeView {
+
+  .node > .header {
+    //.main > .label { background-color: orange; }
+    //.value { background-color: lime; }
+  }
+}

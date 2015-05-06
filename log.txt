@@ -1,0 +1,47 @@
+2015-05-06
+==========
+
+- The utility module "keyboard.js" must also be moved to a separate package.
+
+- Should modules exporting classes be upper- or lowercase? hyphenized?
+
+2015-05-05
+==========
+
+Separating out the TreeView widget from the former project "gpc-ko-widgets".
+
+-------
+
+Current bump on the road: the wish to have individual modules easily reachable - intended here for the fetching of view-specific, JS-packaged Knockout templates -, contrasting with the wish to have a ./lib directory, which would make the development tree more maintainable (gulp "watch" tasks recursing being just one of the reasons).
+
+Isaac Schlueter, the author of NPM, wants developers to create "atomic" packages, as opposed to "kitchen sink" packages. I tend to support that notion. But in the case of widgets, which I want to be able to support multiple views, I'm not yet seeing clearly what the "right" way is. Should I really have a separate package for each view ?
+
+Keeping in mind that "views" are actually just Knockout templates and CSS, with JS only there as a convenience for injection into the DOM, this might be a non-problem. There are two fundamental approaches:
+
+1) Let browserify handle everything
+
+2) Use "packaging" for consumers that cannot use browserify
+
+Many variations are possible on (2), but the basic idea is to provide scripts and resources in a form that the consumer can just link from their HTML page - be it JS, CSS or HTML/Knockout.
+
+(1) on the other hand is completely dependent on Javascript. That means that both Knockout templates and CSS must be "injected" via code (though the Knockout templates do not necessarily need to be stored in the DOM).
+
+This means that the choice of which specific view to use with a given view model could be decided at run-time, and done via a loader routine. Such a routine could be implemented anywhere in the source tree, and the consumer code would not need to know anything about its structure.
+There is a downside however, which is that optimizations become difficult if not impossible, as browserify cannot know in advance which view(s) might be loaded, and therefore has to include all of them (browserify has ways to handle this, but not without added complexity for library consumers; maybe there is a way to properly tackle this later on).
+
+There is another option worth considering. What if consumers would be asked to require() a specific view, which would in turn require() (and probably export, too) the appropriate view model ?
+There is a downside to this as well, in that there would no longer be a convenient 1:n relationship between view models and views.
+
+In fact, the exact definition of a "widget" has not yet come up, and this might be the time. What *is* a widget - is it a view, or is it a view model? Or, do we even *need* to define widgets, or should we always speak of views and view models, separately?
+
+In fact, I think that the absolute best way to approach this would be to use 1:1 relationships between views and view models. This would allow consumers that do not want to get too technical to just use "widgets", while still allowing widget programmers to share view models - either by derivation or just by enforcing some common interface.
+
+I guess I should have known. KISS always wins the day...
+
+This will therefore be relatively easy.
+
+The normalized template naming scheme will also become simpler, as the VIEW part falls away now.
+
+To avoid dead code, the module intended for consumption by browserify should actually be a wrapper, obtaining (and probably returning) the view model via require(), queueing Knockout template and CSS injection along the way [note: use the event "DOMContentLoaded"].
+
+Alternative modules could be provided to support other injection methods (jQuery comes to mind, but also Knockout templates using the string template engine instead of DOM elements in the header).

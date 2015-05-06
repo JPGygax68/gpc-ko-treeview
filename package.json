@@ -1,0 +1,42 @@
+{
+  "name": "gpc-ko-treeview",
+  "version": "0.1.0",
+  "description": "GPC Knockout-based TreeView widget",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "GPC",
+    "Knockout",
+    "Widgets",
+    "TreeView",
+    "Jade",
+    "Stylus"
+  ],
+  "author": "Jean-Pierre Gygax",
+  "license": "MIT",
+  "dependencies": {
+    "almond": "",
+    "browserify": "<10",
+    "jadeify": "",
+    "knockout": "",
+    "stylify": "",
+    "underscore": "^1.8.3"
+  },
+  "browserify": {
+    "transform": [
+      "jadeify",
+      "stylify"
+    ]
+  },
+  "devDependencies": {
+    "browserify-shim": "^3.8.6",
+    "gulp-autoprefixer": "^2.2.0",
+    "gulp-stylus": "^2.0.1",
+    "gulp-util": "^3.0.4",
+    "knockout.mapping": "^2.4.3",
+    "nib": "^1.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

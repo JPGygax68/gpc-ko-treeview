@@ -1,0 +1,6 @@
+﻿// ko if: showRoot
+div.GPC.TreeView(data-bind="template: { name: 'GPC.TreeView:node', data: rootNode }")
+// /ko
+// ko ifnot: showRoot
+div.GPC.TreeView(data-bind="template: { name: 'GPC.TreeView:node-children', data: rootNode }")
+// /ko

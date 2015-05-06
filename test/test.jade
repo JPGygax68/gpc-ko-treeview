@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title GPC Knockout Widgets Test Page
+    script(type="text/html", id="tmplNumericField").
+      <input type="number", data-bind="value: value, valueUpdate: 'input'"></input>
+    script(type="text/html", id="tmplBooleanField").
+      <input type="checkbox", data-bind="checked: value"></input>
+    script(type="text/html", id="tmplStringField").
+      <input type="text", data-bind="value: value"></input>
+    script(type="text/html", id="tmplRow").
+      <div data-bind="foreach: ko.unwrap(value)">
+        <span data-bind="text: $data">...</span>
+      </div>
+    link(rel="stylesheet",href="test.css")
+    script(src="main.js")
+    
+  body(onload="start()")
+          
+    div(data-bind="template: { name: 'GPC.TreeView:root', data: treeview }")
+    div(style="float: right")
+      input(type="button" onclick="test()" value="Click me!")
+    div(style="clear: both")
