@@ -5,6 +5,21 @@
 
 - Should modules exporting classes be upper- or lowercase? hyphenized?
 
+------
+
+Ok, almost working (though with to-dos left open).
+
+Not working yet: images are not being inserted into generated CSS (the "nib" module was doing that at build time).
+
+---------
+24:28
+
+It appears that Stylify, the browserify transform, cannot inline image urls with just package.json configuration.
+
+This means a build step will be needed, which in turn means using a "generated" folder, which should be filled automatically upon installation by running gulp - something of a tall order, but worth pursuing. Of course, just committing the content of that folder to the repository would work too.
+
+Maybe it's worth taking the time to ask the author of Stylify whether this is possible using package.json alone?
+
 2015-05-05
 ==========
 

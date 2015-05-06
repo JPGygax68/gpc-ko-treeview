@@ -55,5 +55,5 @@ gulp.task('test-build', ['test-jade', 'test-css', 'test-browserify', 'test-copy'
 // DEFAULT TASK / WATCHES -----------------------
 
 gulp.task('default', ['test-build'], function() {
-  gulp.watch(['./lib/*.js', './lib/*.jade', './lib/*.styl', './test/*.js', './test/*.jade'], ['test-build']);
+  gulp.watch(['package.json', './lib/*.js', './lib/*.jade', './lib/*.styl', './test/*.js', './test/*.jade'], ['test-build']);
 });

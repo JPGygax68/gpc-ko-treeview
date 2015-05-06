@@ -21,6 +21,7 @@
     "browserify": "<10",
     "jadeify": "",
     "knockout": "",
+    "nib": "^1.1.0",
     "stylify": "",
     "underscore": "^1.8.3"
   },
@@ -29,6 +30,8 @@
       "jadeify",
       "stylify"
     ]
+  },
+  "stylify": {
   },
   "devDependencies": {
     "browserify-shim": "^3.8.6",
