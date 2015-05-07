@@ -28,18 +28,23 @@
   "browserify": {
     "transform": [
       "jadeify",
-      "stylify"
+      "cssify"
     ]
   },
   "stylify": {
+    "define": {
+      "url": "stylus.url()"
+    }
   },
   "devDependencies": {
     "browserify-shim": "^3.8.6",
+    "cssify": "^0.7.0",
     "gulp-autoprefixer": "^2.2.0",
     "gulp-stylus": "^2.0.1",
     "gulp-util": "^3.0.4",
     "knockout.mapping": "^2.4.3",
     "nib": "^1.1.0",
+    "stylus": "^0.51.1",
     "vinyl-source-stream": "^1.1.0"
   }
 }

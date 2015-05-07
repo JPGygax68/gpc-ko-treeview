@@ -6,6 +6,7 @@ var gutil = require('gulp-util');
 var jade = require('gulp-jade');
 var jadeify = require('jadeify');
 var stylus = require('gulp-stylus');
+var stylus_itself = require('stylus');
 var browserify = require('browserify');
 var shim = require('browserify-shim');
 var prefix = require('gulp-autoprefixer');
@@ -13,6 +14,19 @@ var path = require('path');
 var _ = require('underscore');
 var source = require('vinyl-source-stream');
 var nib = require('nib');
+
+// BUILD TASKS FOR THE LIBRARY --------------------------------------
+
+gulp.task('stylus', [], function() {
+  return gulp.src('./lib/*.styl')
+    .pipe( stylus({ 
+      define: { 'url': stylus_itself.url() }
+    }) )
+    //.pipe( prefix('last 20 versions', 'ie 8', 'ie 9') )
+    .pipe( gulp.dest('./generated/') );      
+});
+
+gulp.task('build', ['stylus']);
 
 // BUILD TASKS FOR THE TEST PAGE ------------------------------------
 
@@ -50,10 +64,14 @@ gulp.task('test-copy', function() {
     .pipe( gulp.dest('./output/') );
 });
 
-gulp.task('test-build', ['test-jade', 'test-css', 'test-browserify', 'test-copy']);
+gulp.task('test-build', ['build', 'test-jade', 'test-css', 'test-browserify', 'test-copy']);
 
 // DEFAULT TASK / WATCHES -----------------------
 
 gulp.task('default', ['test-build'], function() {
-  gulp.watch(['package.json', './lib/*.js', './lib/*.jade', './lib/*.styl', './test/*.js', './test/*.jade'], ['test-build']);
+  gulp.watch([
+    'package.json', 
+    './lib/*.js', './lib/*.jade', './lib/*.styl', './generated/*.css',
+    './test/*.js', './test/*.jade'
+  ], ['test-build']);
 });

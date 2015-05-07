@@ -1,3 +1,11 @@
+2015-05-07
+==========
+
+As I was unable to create data URI with Stylify, I fell back to convert Stylus to CSS at build time. This is now working.
+
+Remaining to be done: automating the build so that it gets done upon installation.
+
+
 2015-05-06
 ==========
 
