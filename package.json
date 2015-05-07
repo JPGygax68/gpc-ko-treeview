@@ -2,9 +2,13 @@
   "name": "gpc-ko-treeview",
   "version": "0.1.0",
   "description": "GPC Knockout-based TreeView widget",
+  "repository" : { 
+    "type" : "git", "url" : "git@github.com:JPGygax68/gpc-ko-treeview.git"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "gulp build"
   },
   "keywords": [
     "GPC",
@@ -37,6 +41,7 @@
     }
   },
   "devDependencies": {
+    "gulp": "",
     "browserify-shim": "^3.8.6",
     "cssify": "^0.7.0",
     "gulp-autoprefixer": "^2.2.0",

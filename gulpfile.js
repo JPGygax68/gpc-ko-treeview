@@ -18,6 +18,10 @@ var nib = require('nib');
 // BUILD TASKS FOR THE LIBRARY --------------------------------------
 
 gulp.task('stylus', [], function() {
+  // Compiles Stylus to CSS.
+  // Compiler output is delivered to the ./generated/ folder.
+  // Images referenced from the style rules are converted to data URIs.
+  
   return gulp.src('./lib/*.styl')
     .pipe( stylus({ 
       define: { 'url': stylus_itself.url() }
@@ -27,6 +31,8 @@ gulp.task('stylus', [], function() {
 });
 
 gulp.task('build', ['stylus']);
+  // Main build task. Executing this task makes the library ready
+  // for consumption.
 
 // BUILD TASKS FOR THE TEST PAGE ------------------------------------
 
